@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>War Chest - JavaScript Game || Index </title>
+<script type="text/javascript" src="scripts/land-generation.js"></script>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" /> <!-- page stylesheet -->
+
+</head>
+
+<body><!-- #BeginLibraryItem "/Library/menu.lbi" -->
+
+<div id="header">
+  <ul class="menu">
+    <li><span class="title">WAR CHEST</span></li>
+    <li><a class="menulink" href="index.html">Land Generation Mechanism</a></li>
+    <li><a class="menulink" href="land-pattern-mechanism.html">Land Pattern Mechanism</a></li>
+    <li><a class="menulink" href="start-up-screen.html">Start-Up Screen</a></li>
+    <li><a class="menulink" href="runtime-environment.html">Runtime Environment Mechanism</a></li>
+  </ul>
+</div><!-- #EndLibraryItem --><div id="polygon_map" onmouseover="showHidePanel('on');" onmouseout="showHidePanel('off');"></div>
+<table style="clear:both;" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th width="20%" title="The number of inhabitants will decide the initial size of the World" scope="row"><p class="header">Inhabitants</p></th>
+    <td width="10%" id="inhabitants">&nbsp;</td>
+    <td width="70%" class="caption">The number of  inhabitants will decide the initial size of the World</td>
+  </tr>
+  <tr>
+    <th scope="row" title="The inhabitants will be Grouped into Tribes and divided into Territories.
+    Some Territories will remain blank."><p class="header">Land Plots</p></th>
+    <td id="land_plots">&nbsp;</td>
+    <td><p><span class="caption">Land Plots are calculated by the Total Inhabitants /a random number between 10 to 40.<br />
+    </span></p>      </td>
+  </tr>
+  <tr>
+    <th scope="row" title="The inhabitants will be Grouped into Tribes and divided into Territories.
+    Some Territories will remain blank."><span class="header">Average Inhabitants<br />
+    on Land Plots</span></th>
+    <td id="inhabitant_distribution">&nbsp;</td>
+    <td><span class="caption">Some Land Plots will have more and some Land Plots will have less inhabitants, based on a random generator between 10 and 100.<br />
+      The naturalized  number of inhabitants on each plot of Land will be on a ratio of 40:1 <br />
+      The maximum number  of inhabitants on each plot of Land will be on a ratio of 100:1 </span><br />
+      <span class="caption">The minimum number of inhabitants on each plot cannot be less than on a ratio fo 10:1</span></td>
+  </tr>
+<tr>
+    <th scope="row"><p class="header">Tribes</p></th>
+    <td id="tribes">&nbsp;</td>
+    <td ><p class="caption">The inhabitants will  be Grouped into Tribes and divided into Territories.  
+        <br />
+      The Tribes will be determined by the Land Plots with the most inhabitants above the 40:1 naturalization value (which is the value which supports Civilization and Tribalism). Any value below 40:1 is Barbarianism or Serfdom to Tribes.<br />
+      Some Territories will remain blank. <br />
+      </p>
+      </td>
+  </tr>  
+  <tr>
+    <th scope="row" title="The inhabitants will be Grouped into Tribes and divided into Territories.
+    Some Territories will remain blank."><p class="header">Territory</p></th>
+    <td id="territory">&nbsp;</td>
+    <td><p class="caption">Once the number of Tribes are determined, a formula can divide the Land Plots equally between the Tribes.<br />
+      Proximity can also determine which Land Plots belong to which Tribes. A formula to group all Land Plots within the closest Proximity to a Tribe can be devised. <br />
+        The Tribe Proximity formula can also use link blocks to determine Tribal Affiliation. If there is an open path from a Tribe which is not obstructed by the sphere of influence of another Tribe, this falls within Proximity.<br />
+    </p>    </td>
+  </tr>  
+  <tr>
+    <th scope="row" title="A formula will decide the total quantity of resources available.  
+A second equation will determine the resource type
+A third equation will decide the Resource location on the Map (which polygon owns the resource)."><p class="header">Resources</p></th>
+    <td>&nbsp;</td>
+    <td>
+	   <p class="caption">A formula will  decide the total quantity of resources available. <br />
+	     A second equation  will determine the resource type
+	     <br />
+      A third equation  will decide the Resource location on the Map (which polygon owns the resource).   </p></td>
+  </tr>
+  <tr>
+    <th scope="row">&nbsp;</th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<form id="form1" name="form1" method="post" action="#">
+
+    <input type="submit" name="button" id="button" value="Generate Environment" onclick="generateEnvironment();return false;"/>
+</form>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp; </p>
+</body>
+</html>

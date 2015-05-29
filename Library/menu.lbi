@@ -1,0 +1,11 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<div id="header">
+  <ul class="menu">
+    <li><span class="title">WAR CHEST</span></li>
+    <li><a class="menulink" href="/WarChest/index.html">Land Generation Mechanism</a></li>
+    <li><a class="menulink" href="/WarChest/land-pattern-mechanism.html">Land Pattern Mechanism</a></li>
+    <li><a class="menulink" href="../start-up-screen.html">Start-Up Screen</a></li>
+    <li><a class="menulink" href="../runtime-environment.html">Runtime Environment Mechanism</a></li>
+  </ul>
+</div>

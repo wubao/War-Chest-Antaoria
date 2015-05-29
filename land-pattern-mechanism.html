@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>War Chest - Land Pattern Mechanism</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" /> <!-- page stylesheet -->
+<script type="text/javascript" src="scripts/land-pattern-mechanism.js"></script>
+</head>
+
+<body><!-- #BeginLibraryItem "/Library/menu.lbi" -->
+
+<div id="header">
+  <ul class="menu">
+    <li><span class="title">WAR CHEST</span></li>
+    <li><a class="menulink" href="index.html">Land Generation Mechanism</a></li>
+    <li><a class="menulink" href="land-pattern-mechanism.html">Land Pattern Mechanism</a></li>
+    <li><a class="menulink" href="start-up-screen.html">Start-Up Screen</a></li>
+    <li><a class="menulink" href="runtime-environment.html">Runtime Environment Mechanism</a></li>
+  </ul>
+</div><!-- #EndLibraryItem --><div id="content">
+<p>The objective of the Land Pattern Mechanism is to conceive a logical  formula for how to expand Land Tiles in a Grid Plane.</p>
+<ul>
+  <li>Create a static 9x9 table each with a unique dynamically generated ID to  help visualize how Land Tiles (once created in the Generator and given X Y  Coordinates) are mapped in a static table.  </li>
+  <li>This will help visualize
+    <ul>
+      <li>which pattern to use  to build a Land Cube (9 Land Tiles Grid) i.e.
+        <ul>
+          <li>will it be a spiral  pattern with a new layer around each square</li>
+          <li>will it be a  predefined pattern, which builds Land Cubes and then places new Cubes around  the original Cube in a known pattern.</li>
+        </ul>
+      </li>
+      <li>how the Land Tiles  are populated to expand the map.</li>
+    </ul>
+  </li>
+    
+    <li>The second step will be to build a dynamic table, which when once all  the Land Tiles are known and converted to Land Cubes, the pattern will initiate  to Generate an invisible map, before a program executes to Generate a visual  map.</li>
+</ul>
+
+</div>
+<div id="plottertable"></div>
+<!-- Placeholder for the table -->
+<div id="oTableContainer"></div>
+
+
+<p>&nbsp;</p>
+<form id="generateTable" name="generateTable" method="post" action="">
+  columns
+  <input type="text" name="columns" id="columns" />
+  rows
+  <input type="text" name="rows" id="rows" />
+  <input type="submit" name="button" id="button" value="Submit" onclick="fnInit();return false;" />
+</form>
+<p>&nbsp;</p>
+
+<h2>The Cube Maker Pattern (order of Plot Distribution)</h2>
+<table width="300" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>5</td>
+    <td>3</td>
+    <td>8</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>&nbsp;</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>4</td>
+    <td>6</td>
+  </tr>
+</table>
+<p>The Sequence below uses the Cube Maker Pattern above to find the central xy coords of a new Cube plotted on the map in the new pattern's direction.</p>
+<table width="300" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th scope="col">Pattern Direction</th>
+    <th scope="col">Sequences</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>(-3, 0)</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>(+3, 0)</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>(0, +3)</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>(0, -3)</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>(-3, +3)</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>(+3, -3)</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>(-3, -3)</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>(+3, +3)</td>
+  </tr>
+</table>
+<p>Once we can determine the new Cube's central xy coords we can determine the xy coords of the surrounding Plots (using the distribution sequence of the Cube Maker Pattern).</p>
+<table width="300" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <th scope="col">Cube Maker Pattern</th>
+    <th scope="col">xy coords</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>(-1, 0)</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>(+1, 0)</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>(0, +1)</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>(0, -1)</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>(-1, +1)</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>(+1, -1)</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>(-1, -1)</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>(+1, +1)</td>
+  </tr>
+</table>
+<p>For each expansion of Cubes a formula needs to be followed to compensate for the exponential factor of the expansion.</p>
+<table width="400" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <th scope="col">Expansions</th>
+    <th scope="col">Core Cubes</th>
+    <th scope="col">Expon Cubes</th>
+    <th scope="col">Total Cubes</th>
+    <th scope="col">Cubes Between<br /> 
+    Core Cubes</th>
+  </tr>
+  <tr>
+    <td>-1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>1</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>8</td>
+    <td>0</td>
+    <td>8</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>8</td>
+    <td>+8</td>
+    <td>16</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>8</td>
+    <td>+16</td>
+    <td>24</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>8</td>
+    <td>+24</td>
+    <td>32</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>8</td>
+    <td>+32</td>
+    <td>40</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>8</td>
+    <td>+40</td>
+    <td>48</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>8</td>
+    <td>+48</td>
+    <td>56</td>
+    <td>6</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>War Chest - JavaScript Game || Index </title>
+<script type="text/javascript" src="scripts/runtime-environment.js"></script>
+<script type="text/javascript" src="scripts/time-clock.js"></script>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" /> <!-- page stylesheet -->
+
+
+
+
+<script type="text/javascript">
+function Select() {
+var selectedValue = document.getElementById("ruler_type").value;
+document.getElementById("1").style.display = "none";
+document.getElementById("2").style.display = "none";
+document.getElementById("3").style.display = "none";
+document.getElementById("4").style.display = "none";
+document.getElementById("5").style.display = "none";
+
+if(selectedValue == "Aggressive") {
+document.getElementById("1").style.display = "block";
+document.getElementById("2").style.display = "none";
+document.getElementById("3").style.display = "none";
+document.getElementById("4").style.display = "none";
+document.getElementById("5").style.display = "none";
+	}
+else if(selectedValue == "Defensive") {
+document.getElementById("1").style.display = "none";
+document.getElementById("2").style.display = "block";
+document.getElementById("3").style.display = "none";
+document.getElementById("4").style.display = "none";
+document.getElementById("5").style.display = "none";
+	}
+else if(selectedValue == "Commercial") {
+document.getElementById("1").style.display = "none";
+document.getElementById("2").style.display = "none";
+document.getElementById("3").style.display = "block";
+document.getElementById("4").style.display = "none";
+document.getElementById("5").style.display = "none";
+	}
+else if(selectedValue == "Industrial") {
+document.getElementById("1").style.display = "none";
+document.getElementById("2").style.display = "none";
+document.getElementById("3").style.display = "none";
+document.getElementById("4").style.display = "block";
+document.getElementById("5").style.display = "none";
+	}
+else if(selectedValue == "Expansive") {
+document.getElementById("1").style.display = "none";
+document.getElementById("2").style.display = "none";
+document.getElementById("3").style.display = "none";
+document.getElementById("4").style.display = "none";
+document.getElementById("5").style.display = "block";
+	}
+}
+</script>
+
+
+<style type="text/css">
+
+#jsalarmclock{
+font-family: Tahoma;
+font-weight: bold;
+font-size: 12px;
+}
+
+#jsalarmclock div{
+margin-bottom: 0.8em;
+}
+
+#jsalarmclock div.leftcolumn{
+float: left;
+width: 150px;
+font-size: 13px;
+background-color: lightyellow;
+clear: left;
+}
+
+#jsalarmclock span{
+margin-right: 5px;
+}
+
+</style>
+
+
+</head>
+
+<body>
+
+<p><!-- #BeginLibraryItem "/Library/menu.lbi" -->
+
+<div id="header">
+  <ul class="menu">
+    <li><span class="title">WAR CHEST</span></li>
+    <li><a class="menulink" href="index.html">Land Generation Mechanism</a></li>
+    <li><a class="menulink" href="land-pattern-mechanism.html">Land Pattern Mechanism</a></li>
+    <li><a class="menulink" href="start-up-screen.html">Start-Up Screen</a></li>
+    <li><a class="menulink" href="runtime-environment.html">Runtime Environment Mechanism</a></li>
+  </ul>
+</div><!-- #EndLibraryItem --></p>
+<form id="start-up" name="start-up" method="post" action="/WarChest/ssl/process.php">
+<table width="800" id="login" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="400">
+    
+    
+  <p>
+    <label>
+    *
+    <input type="text" name="username" id="username" />
+    Username</label>
+  </p>
+  <p>
+    <label>
+    *
+    <input type="text" name="password" id="password" />
+    Password</label>
+  </p>
+  <p>
+    <label>
+    *
+    <input type="text" name="kingdom" id="kingdom" />
+    Name Your Kingdom</label>
+  </p>    </td>
+    <td width="400">
+    <div id="selection_screen"> 
+    <p>Choose how you will Rule</p>
+   
+    <select size="5" name="ruler_type" id="ruler_type" onchange="Select();">
+      <option value="Aggressive">Aggressive</option>
+      <option value="Defensive">Defensive</option>
+      <option value="Commercial">Commercial</option>
+      <option value="Industrial">Industrial</option>
+      <option value="Expansive">Expansive</option>
+    </select>    
+    <div id="1" class="ruler-panel">
+     <img src="images/shield4.jpg" alt="shield" width="86" height="98" />
+     <p>AGGRESSIVE<br />
+      Bonus: +20% Attack</p>
+    </div>
+    <div id="2" class="ruler-panel">
+      <img src="images/shield5.jpg" alt="shield" width="101" height="98" />
+      <p>DEFENSIVE<br />
+      Bonus: +20% Defense</p>
+    </div>
+    <div id="3" class="ruler-panel">
+      <img src="images/shield3.jpg" alt="shield" width="101" height="101" />
+      <p>COMMERCIAL<br />
+        Bonus: +20% Trade</p>
+    </div>
+    <div id="4" class="ruler-panel">
+      <img src="images/shield2.jpg" alt="shield" width="113" height="101" />
+      <p>INDUSTRIAL<br />
+      Bonus: +20% Resource Extraction</p>
+    </div>
+    <div id="5" class="ruler-panel"><img  src="images/shield1.jpg" alt="shield" width="86" height="95" />
+      <p>EXPANSIVE<br />
+      Bonus: +20% Pioneer</p>
+    </div>
+ </div>    </td>
+  </tr>
+</table>
+  <table id="results" width="800" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="400" title="The number of inhabitants will decide the initial size of the World" scope="row"><p class="header">Inhabitants</p></td>
+    <td width="400" id="inhabitants">&nbsp;</td>
+  </tr>
+  <tr>
+    <td scope="row" title="The inhabitants will be Grouped into Tribes and divided into Territories.
+    Some Territories will remain blank."><p class="header">Land Plots</p></td>
+    <td id="land_plots">&nbsp;</td>
+  </tr>
+  <tr>
+    <td scope="row" title="The inhabitants will be Grouped into Tribes and divided into Territories.
+    Some Territories will remain blank."><span class="header">Average Inhabitants<br />
+    on Land Plots</span></td>
+    <td id="inhabitant_distribution">&nbsp;</td>
+  </tr>
+<tr>
+    <td scope="row"><p class="header">Tribes</p></td>
+    <td id="tribes">&nbsp;</td>
+  </tr>
+<tr>
+    <td scope="row"><p class="header">Timer Clock</p></td>
+    <td id="tribes">&nbsp;</td>
+  </tr>  
+</table>
+
+
+<input type="submit" name="button" id="button" value="Generate Environment" onclick="generateEnvironment();return false;"/>
+    <input type="hidden" name="inhabitants" value="" />
+    <input type="hidden" name="land_plots" value="" />
+    <input type="hidden" name="tribes" value="" />   
+    <input type="hidden" name="ruler_bonus" value="" />           
+</form>
+
+<span id="clock">&nbsp;</span>
+
+
+<p><b>Current Server Time:</b> <span id="servertime"></span></p>
+<input name="asdf" type="file" />
+
+
+</body>
+</html>
